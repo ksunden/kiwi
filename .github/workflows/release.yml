@@ -23,6 +23,8 @@ jobs:
         with:
           python-version: '3.x'
       - name: Build sdist
+        env:
+          SETUPTOOLS_SCM_PRETEND_VERSION: "1.4.4"
         run: |
           pip install --upgrade pip
           pip install wheel build
@@ -101,6 +103,7 @@ jobs:
       - name: Build wheels
         if: matrix.manylinux_version == 'manylinux1'
         env:
+          SETUPTOOLS_SCM_PRETEND_VERSION: "1.4.4"
           CIBW_BUILD: "cp37-* cp38-*"
           CIBW_ARCHS_MACOS: x86_64 universal2 arm64
           CIBW_ARCHS_LINUX: ${{ matrix.archs }}
@@ -115,6 +118,7 @@ jobs:
       - name: Build wheels
         if: matrix.manylinux_version == 'manylinux2010'
         env:
+          SETUPTOOLS_SCM_PRETEND_VERSION: "1.4.4"
           CIBW_BUILD: "cp39-* cp310-* pp37-* pp38-*"
           CIBW_ARCHS_MACOS: x86_64 universal2 arm64
           CIBW_ARCHS_LINUX: ${{ matrix.archs }}
@@ -129,6 +133,7 @@ jobs:
       - name: Build wheels
         if: matrix.manylinux_version == 'manylinux2014'
         env:
+          SETUPTOOLS_SCM_PRETEND_VERSION: "1.4.4"
           CIBW_BUILD: "cp311-* pp39-*"
           CIBW_ARCHS_MACOS: x86_64 universal2 arm64
           CIBW_ARCHS_LINUX: ${{ matrix.archs }}
